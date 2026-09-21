@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(246, 234, 224);
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 40px;
+        }
+
+        .container {
+            box-shadow: 0 4px 10px rgb(0, 0, 0, 0.5);
+            padding: 30px 60px;
+            background-color: bisque;
+            border-radius: 8px;
+            /* margin: 0 au; */
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+
+        }
+
+        .form-group>label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+
+        .checkbox-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+
+        .radio-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: rgb(58, 58, 190);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 0.2px solid wheat;
+            cursor: pointer;
+        }
+
+        button[type="reset"] {
+            background-color: rgb(39, 39, 67);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 0.2px solid wheat;
+            cursor: pointer;
+        }
+
+        button [type="submit"]:hover {
+            background-color: rgb(113, 113, 244);
+        }
+
+        button [type="reset"]:hover {
+            background-color: rgb(113, 113, 244);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Isi Form Pendaftaran Mahasiswa</h1>
+        <p>Tolong isi pendaftaran berikut :</p>
+        <hr>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">name</label>
+                <input type="text" id="name" placeholder="enter your name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="">no tel./hp</label>
+                <input type="tel" name="hp">
+            </div>
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <label for="">hobby</label>
+                    <label for=""><input type="checkbox" name="hobby[]">
+                        tidur</label>
+                    <label for=""><input type="checkbox" name="hobby[]">
+                        lari</label>
+                    <label for=""><input type="checkbox" name="hobby[]">
+                        futsal</label>
+                    <label for=""><input type="checkbox" name="hobby[]">
+                        fotografi</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="radio-group">
+                    <label for="">jenis kelamin :</label>
+                    <label for=""><input type="radio" name="jeniskelamin" checked> Laki-Laki</label>
+                    <label for=""><input type="radio" name="jeniskelamin"> perempuan</label>
+                </div>
+            </div>
+            <div class="from-group">
+                <label for="">pilih jurusan :</label>
+                <select name="" id="">
+                    <option value="">Choose major</option>
+                    <option value="">informatika</option>
+                    <option value="">sistem informasi</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="">foto</label>
+                <input type="file" name="foto">
+            </div>
+            <div class="from-group">
+                <label for="">alamat</label>
+                <textarea name="alamat" cols="30" rows="5"></textarea>
+            </div>
+
+            <button type="submit">kirim</button>
+            <button type="reset">reset</button>
+        </form>
+    </div>
+</body>
+
+</html>
