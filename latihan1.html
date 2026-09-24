@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPKD Jakarta Pusat | Future Skills Hub</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            cursor: none;
+        }
+
+        body {
+            background: #050816;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* PARTICLE CANVAS */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        /* BACKGROUND */
+        .bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, #00e5ff33, transparent 30%),
+                radial-gradient(circle at 80% 30%, #7c3aed55, transparent 30%),
+                radial-gradient(circle at 50% 80%, #00ff9955, transparent 35%),
+                #050816;
+            z-index: -3;
+        }
+
+        /* CURSOR */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00e5ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            box-shadow:
+                0 0 10px #00e5ff,
+                0 0 25px #00e5ff;
+            transition: 0.05s linear;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, .04);
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00e5ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #00e5ff;
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10%;
+            perspective: 1200px;
+        }
+
+        .hero-content {
+            text-align: center;
+            transform-style: preserve-3d;
+            animation: float3d 5s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #00e5ff, #8b5cf6, #00ff95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: auto;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .hero-btn {
+            margin-top: 40px;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #00e5ff, #8b5cf6);
+            color: white;
+            cursor: pointer;
+            box-shadow:
+                0 0 20px #00e5ff,
+                0 0 50px #8b5cf6;
+            transition: .4s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+        }
+
+        /* 3D CARD */
+        .section {
+            padding: 120px 10%;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, .1);
+            padding: 30px;
+            border-radius: 25px;
+            transform-style: preserve-3d;
+            transition: .5s;
+        }
+
+        .card:hover {
+            transform:
+                rotateX(10deg) rotateY(-10deg) translateY(-10px);
+            box-shadow:
+                0 0 20px #00e5ff55,
+                0 0 60px #8b5cf633;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: #00e5ff;
+        }
+
+        .card p {
+            color: #d1d5db;
+        }
+
+        /* STATS */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 80px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h2 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #00e5ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat p {
+            color: #94a3b8;
+        }
+
+        /* PARALLAX */
+        .parallax {
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            font-weight: 800;
+            background:
+                linear-gradient(rgba(5, 8, 22, .7), rgba(5, 8, 22, .7)),
+                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            color: #94a3b8;
+        }
+
+        @keyframes float3d {
+
+            0%,
+            100% {
+                transform: rotateY(-5deg) translateY(0);
+            }
+
+            50% {
+                transform: rotateY(5deg) translateY(-20px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media(max-width:768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .parallax {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <canvas id="particles"></canvas>
+    <div class="cursor"></div>
+
+    <nav>
+        <div class="logo">PPKD JP</div>
+        <ul>
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#">Pelatihan</a></li>
+            <li><a href="#">Program</a></li>
+            <li><a href="#">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PPKD <span>Jakarta Pusat</span></h1>
+            <p>
+                Menciptakan talenta masa depan melalui pelatihan kerja berbasis teknologi,
+                digitalisasi, dan industri kreatif.
+            </p>
+
+            <button class="hero-btn">
+                Jelajahi Pelatihan
+            </button>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="cards">
+
+            <div class="card">
+                <h3>💻 Web Programming</h3>
+                <p>Membangun website modern dengan HTML, CSS, JavaScript dan teknologi terbaru.</p>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Desain Grafis</h3>
+                <p>Menguasai Adobe Photoshop, Illustrator dan branding digital.</p>
+            </div>
+
+            <div class="card">
+                <h3>📱 Digital Marketing</h3>
+                <p>SEO, social media marketing dan strategi pemasaran digital.</p>
+            </div>
+
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <h2>10K+</h2>
+                <p>Alumni</p>
+            </div>
+
+            <div class="stat">
+                <h2>50+</h2>
+                <p>Program</p>
+            </div>
+
+            <div class="stat">
+                <h2>95%</h2>
+                <p>Kepuasan</p>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="parallax">
+        FUTURE SKILLS HUB
+    </section>
+
+    <footer>
+        © 2025 PPKD Jakarta Pusat • Futuristic Edition
+    </footer>
+
+    <script>
+
+        /* CURSOR */
+
+        const cursor = document.querySelector('.cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        /* PARTICLES */
+
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+
+        const particles = [];
+
+        for (let i = 0; i < 120; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 1,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8
+            });
+        }
+
+        function animate() {
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "#00e5ff";
+                ctx.fill();
+
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        /* SCROLL REVEAL */
+
+        const reveals = document.querySelectorAll('.reveal');
+
+        window.addEventListener('scroll', () => {
+
+            reveals.forEach(el => {
+
+                const top = el.getBoundingClientRect().top;
+
+                if (top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
